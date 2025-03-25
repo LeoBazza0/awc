@@ -1,0 +1,249 @@
+1) Analisi dei Requisiti
+	Requisiti Funzionali
+	Requisiti Non Funzionali
+2) Identificazione delle Funzionalità da Sviluppare
+	Descrivere meglio i Requisiti Funzionali e come si traducono nello Sviluppo (vedi "Operazioni da Svolgere")
+3) Progettazione della Struttura e della Presentazione delle Pagine Web
+	Descrizione della Directory di Lavoro
+	Descrizione dell'HTML e CSS per mettere insieme la Struttura della Pagina (FIGMA)
+4) Progettazione della Sorgente di Informazioni Statica o Dinamica
+	Fetch dei Dati: API utilizzate
+	Gestione del Local Storage & Session Storage
+5) Implementazione dell'Applicazione Stessa
+	Screenshot dell'Applicazione ...
+
+Tutti i dati degli utenti possono andare in un json utenti, incluso i loro piatti preferiti e le ricette salvate nel ricettario personale (basta l'ID per entrambe le cose, poi il fetch meglio farlo in locale direttamente). Rettifica: per il ricettario personale ci vuole anche una nota oltre all'ID.
+
+Le recensioni vanno in un altro json, con ID_MEAL + USER_EMAIL + data (per qualche motivo inserita dall'utente) + i due voti
+
+Nel Session Storage va semplicemente l'email dell'utente collegato, se è collegato qualcuno.
+
+Idee:
+- Home Page con:
+	- Piatti preferiti
+	- Ricette salvate
+	- Un elenco di categoria a caso
+	- Un elenco di area (nazione) a caso
+
+- Login con Termini e Condizioni d'Uso personalizzate?
+
+- Pagine HTML da implementare:
+	1) login
+	2) registrazione
+	3) home page
+	4) profilo personale, con modifica dati e ricette preferite
+	5) pagina di una ricetta
+	6) pagina del proprio ricettario
+
+
+Cose importanti:
+- Considerare casi limite:
+	Utente cancella account -> Cosa succede alle sue recensioni?
+		> Utente "Anonimo" (così rimangono i dati)
+		> Cancello recensioni
+		> Segnalarlo nell'informativa
+- Ogni piatto deve mostrare sia gusto che difficoltà
+
+
+Tecnicismi:
+- COLORI BOOTSTRAP? Solved
+- MENU RESPONSIVE BOOTSTRAP? Solved
+- CALL ALLE API? Solved
+- MECCANISMO DI RECUPERO LISTA INGREDIENTI? Solved
+
+Fonti:
+https://lingtalfi.com/bootstrap4-color-generator
+https://getbootstrap.com/docs/5.3/examples/navbars-offcanvas
+
+-------------------------------------------------------------
+
+EMAIL: CHECK IF EMAIL && CHECK IF UNIQUE
+USERNAME: CHECK CHARSET?
+PASSWORD: CHECK LENGTH + CHARACTERS + == TO PASSWORD2
+CHECKBOX: CHECK IF CHECKED
+
+-------------------------------------------------------------
+
+Allo Startup (Home Page) vengono caricate:
+
+- Tutte le categorie
+- Tutte le aree
+- Tutti gli ingredienti
+
+- Tutte le ricette basate sui propri interessi, ovvero:
+	- Ricette delle categorie piaciute
+	- Ricette delle aree piaciute
+	- Ricette con gli ingredienti piaciuti
+	- Ricette salvate nel ricettario
+- 15 ricette a caso, con random.php
+
+Mentre le cose sopra vengono aggiornate solo se:
+	- Ho aggiornato i miei interessi
+	- Ho fatto logout (in questo caso si cancellano)
+	- Ho fatto login (in questo caso si caricano)
+	- Non ci sono nel local Storage (vale per categorie, aree e ingredienti)
+le 15 ricette a caso vengono ricaricate tutte le volte
+
+Per far sembrare i consigliati casuali, li posiziono in maniera random nello slider ogni volta
+
+Tutte queste vengono salvate in un json application_data,
+memorizzando sempre
+> Per le ricette solo
+	- strMeal
+	- strMealThumbn
+	- idMeal
+> Per le categorie
+	- strCategory
+	- strCategoryDescription
+> Per le aree 
+	- strArea
+> Per gli ingredienti
+	- strIngredient	
+	- strDescription
+
+Dopodiché:
+	1 Se apro una ricetta richiedo esplicitamente tutti i suoi dati
+	2 Se faccio una ricerca:
+		- Sto digitando la prima lettera? 
+			Allora uso l'API apposita e carico RicetteCercate in memoria
+		- Guardo tra le Aree, Categorie e Ingredienti e RicetteCercate
+	3 Se clicco sul risultato della ricerca che è una ricetta, vedi punto 1
+	4 Se clicco sul risultato della ricerca che è una delle altre 3 cose, vado alla pagina dei risultati
+	5 Se faccio invio nella ricerca vado ancora alla pagina dei risultati
+	
+---------------------------------------------------------------------------
+
+PER GLI UTENTI:
+
+Nel local storage ho un array users, dove ogni utente ha
+	- email
+	- username (se non impostato = email prima della @)
+	- password (!!! per il momento non cifrata)
+	- interests:
+		- areas (array di string)
+		- categories (array di string)
+		- ingredients (array di string)
+	- cookbook (array di coppie id - note)
+
+Verificare in fase di registrazione che l'email non sia già in uso
+
+Nel login verificare credenziali
+
+Mantenere nel Session Storage current_user (la sua email)
+
+---------------------------------------------------------------------------
+
+PER LE REVIEW:
+
+Vengono memorizzate in una mappa con key = recipe_id e value array di recensioni.
+
+Ogni recensione è:
+- recipe_id (poi valutare se necessario) => sì è necessario
+- email utente che l'ha creata
+- content
+- taste
+- difficulty
+- timestamp (better than date for uniqueness)
+
+---------------------------------------------------------------------------
+What is left to do:
+
+- Shuffle randoms so that it looks more random even if it's not FATTO
+- Reorder code inside every <script> of the pages FATTO
+- Comment every function FATTO
+- Fix reviews problems FATTO
+- Add random meals next to the reviews of the page FATTO
+- Terms and Conditions FATTO
+- Change font button FATTO
+- Mark deleted account's reviews as anonymous FATTO
+- Simplify input for the review score FATTO
+- Make sure that deleting a review keeps you in the same reviews tab (URL param) FATTO
+- Add a button to empty the input in selecting favourite tags FATTO
+- Fix code for recipe instructions, cause there's no need to do multiple steps FATTO
+- Increase horizontal scrollbar sizes FATTO
+- Maybe show more recipes in the hero section for smaller screen sizes FATTO
+- Remove all console logs FATTO
+- Make Reset Data button work, emptying the storage and reloading the page FATTO
+- Make Load Demo Data work, adding some AI generated data to fill recipes with reviews FATTO
+- Fix Footer for all pages FATTO
+- Make sure everything works fine on mobile FATTO
+
+--------------------------------------
+1. INTRODUZIONE
+Cos'è la piattaforma e a che richiesta risponde, cosa consente di fare e che tecnologie utilizza (Standard HTML5 + API + JSON)
+
+2. ANALISI ED IMPLEMENTAZIONE DEI REQUISITI:
+(F) Consultazione della Collezione di Ricette del Database TheMealDB, esplorando le pagine dell'Applicazione o tramite la funzionalità di Ricerca (UTENTI NON REGISTRATI E REGISTRATI)
+(F) Consultazione dei dettagli relativi ad una Ricetta, inclusivi delle recensioni lasciate dagli utenti su di essa (UTENTI NON REGISTRATI E REGISTRATI)
+(F) Registazione e Login al Sito, con la possibilità di indicare i propri interessi (UTENTI NON REGISTRATI)
+(F) Modifica dei dati del proprio account e cancellazione dello stesso (UTENTI REGISTRATI)
+(F) Consultazione di un sottoinsieme della Collezione di Ricette basata costruito a partire dagli interessi espressi in fase di registrazione ed eventualmente modificati successivamente (UTENTI REGISTRATI)
+(F) Creazione, Popolamento e Modifica di un proprio Ricettario Personale, costituito da ricette salvate e dalle relative annotazioni private (UTENTI REGISTRATI)
+(F) Pubblicazione di una Recensione relativa ad una Ricetta, comprensiva di valutazioni, commento e data di preparazione della ricetta (UTENTI REGISTRATI)
+(F) Cancellazione delle proprie Recensioni pubbliche (UTENTI REGISTRATI)
+
+(NF) Fruizione dell'Applicazione su ogni Browser moderno (strumenti MDN + Edge DevTools + Caniuse) 
+(NF) Fruizione dell'Applicazione da ogni dispositivo di qualsiasi risoluzione (Bootstrap breakpoints and responsiveness + css @media and @container )
+(NF) Fetch dei dati dall'API in tempi ragionevoli e senza sovraccaricare il Server (tutto il casino della random.php e errore 429 - Too Many Requests)
+
+3. STRUTTURA DEL SITO WEB:
+index.HTML
+> css
+	style.css	
+	my-colors.css
+> img
+	...
+> js
+	api.js
+	form-control.js
+	storage.js
+	test-data.js
+	utils.js
+> pages
+	profile.html
+	recipe.html
+	search.html
+	signup.html
+
+Risorse esterne:
+	- Bootstrap 5.3.2 (CSS)
+	- Bootstrap 5.3.2 (JS)
+	- Popper.js 2.11.8
+	- Google Fonts API
+
+4. PROGETTAZIONE DELLE SORGENTI DI INFORMAZIONI 
+	4.1 TheMealDB.com - API utilizzate		
+		--- tutte le API
+
+	4.2 Offline Storage per Caching, Utenze e Recensioni
+		-- Struttura dello Storage
+
+		
+5. NOTE FINALI
+	- Informazioni relative alla Form Validation
+	- Recensioni di Account Cancellati
+	- Cambio del Font
+	- Utilizzo dei Dati di Demo
+
+6. SCHERMATE DIMOSTRATIVE DI FUNZIONAMENTO
+	- Home Page Utente non Loggato con Ricette a caso
+	- Sign Up 1 & 2 con Validation!
+	- Login banner con Validation!
+	- Home Page Loggato con Piatti suggeriti e salvati
+	- Barra di Ricerca + Risultati di Ricerca (Keyword "chi")
+	- Scheda di una Ricetta con recensioni (mostrare che quella dell'utente loggato è cancellabile)
+	- Form per Scrittura Recensione con Validation!
+	- Salvataggio di una Ricetta nel Ricettario (Popup)
+	- Profile Page - Profile Tab con Validation! (notare log off e delete account)
+	- Profile Page - Cookbook Tab con Edit on
+	- Profile page - Reviews Tab con Load More
+
+ 
+7. FONTI 
+
+	
+
+
+
+
+	

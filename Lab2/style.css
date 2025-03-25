@@ -1,0 +1,76 @@
+img {
+    height: 200px;
+}
+
+#img_id {
+    /* a tutti quelli che hanno l'id cosi verrà applicato questa cosa */
+    height: 400px;
+}
+
+/* tra la class e l'id vince l'id */
+/* tra id e quello che è scritto in html vince il secondo */
+
+.img_class {
+    /* a tutti quelli che hanno l'CLASS cosi verrà applicato questa cosa */
+    height: 800px;
+}
+ /* https://cssgridgarden.com */ 
+/* ------------------------------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------------ */
+
+.profilo {
+    /* class*/
+    height: 100px;
+    border-radius: 100px;
+}
+
+body {
+    background-color: #e5e9ff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    text-align: center;
+    background-color: #6998ff;
+    padding: 20px;
+}
+
+#nome {
+    /* id */
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.subtitle {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.contatto,
+.formazione,
+.esperienze_lavorative {
+    background-color: white;
+    padding: 20px;
+    margin: 20px;
+
+}
+
+.contatto {
+    border-width: 2px;
+    border: blue;
+    border-style: solid;
+}
+
+.elemento {
+    border: 1px solid #cccc;
+    padding: 10px;
+
+}
+
+.griglia {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 10px;
+}
+

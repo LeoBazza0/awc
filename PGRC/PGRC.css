@@ -1,0 +1,87 @@
+.color-red-pgrc {
+    background-color: #f85b5b;
+}
+
+.color-white-pgrc {
+    background-color: #fefded
+}
+
+.color-light-green-pgrc {
+    background-color: #c6ebc5;
+} 
+
+.color-dark-green-pgrc {
+    background-color: #a1c398;
+}
+
+@font-face {
+    font-family: 'alstoria';
+    src: url(alstoria.ttf);
+    src: local('alstoria'), url('alstoria.ttf') format('truetype');
+    /* Used my own font, downloaded from the internet https://www.dafont.com/alstoria.font */
+}
+
+.font-main-pgrc {
+    font-family: 'Alstoria', serif;
+}
+
+.font-size-navbar {
+    font-size: large;
+}
+
+
+.button-pgrc {
+    background-color: #a1c398;
+    border-color: #a1c398;
+}
+
+.button-pgrc:hover {
+    background-color: #c6ebc5;
+
+}
+
+.image-container {
+    display: inline-block;
+    width: 100%;
+    white-space: nowrap;
+    max-height: 400px;
+
+}
+
+.container-background {
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+    /* Distribuisce le immagini uniformemente lungo la larghezza della pagina */
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    left: 0;
+}
+
+.search-bar-pgrc {
+    transform: translate(-50%, -50%);
+    bottom: 0%;
+    left: 50%;
+}
+
+@media (max-width: 650px) {
+    /* 576px 768px*/
+
+    .container-background {
+        grid-template-columns: repeat(2, 50%);
+    }
+
+    .search-bar-pgrc {
+        bottom: 43%;
+        width: 100% !important;
+        padding: 0 1rem;
+    }
+
+}
+
+.img-background {
+    width: 100%;
+    /* Flessibilità delle immagini all'interno del contenitore */
+}

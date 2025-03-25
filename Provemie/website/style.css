@@ -1,0 +1,68 @@
+.color1 {
+    background: #FBF5DD;
+}
+
+.color2 {
+    background: #A6CDC6;
+}
+
+.color3 {
+    background: #16404D;
+}
+
+.color4 {
+    background: #DDA853;
+}
+
+@font-face {
+    font-family: 'ClassicPalaceDemoRegular-RpE0M';
+    src: url(ClassicPalaceDemoRegular-RpE0M.ttf);
+    src: local('ClassicPalaceDemoRegular-RpE0M'), url('ClassicPalaceDemoRegular-RpE0M.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Jellee-Roman';
+    src: url(Jellee-Roman.ttf);
+    src: local('Jellee-Roman'), url('Jellee-Roman.ttf') format('truetype');
+}
+
+.font1 {
+    font-family: ClassicPalaceDemoRegular-RpE0M;
+}
+
+.font2 {
+    font-family: Jellee-Roman;
+}
+
+.colortxt1 {
+    color: #FBF5DD;
+}
+
+.colortxt2 {
+    color: #A6CDC6;
+}
+
+.colortxt3 {
+    color: #16404D;
+}
+
+.colortxt4 {
+    color: #DDA853;
+}
+
+.input-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    /* Spazio tra le righe */
+}
+
+.input-row label {
+    width: 200px;
+    /* Larghezza fissa per allineare le etichette */
+}
+
+.input-row input {
+    width: 200px;
+    /* Larghezza della casella */
+}
